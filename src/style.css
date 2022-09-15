@@ -1,0 +1,37 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  background: white;
+  font-family: sans-serif;
+}
+
+.container {
+  width: 300px;
+  min-height: 200px;
+  border-radius: 5px;
+  background: white;
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  overflow: hidden;
+}
+
+.image-class {
+  width: 100%;
+}
+
+.content {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+
+.heading {
+  color: gray;
+}
+
+.dropdown {
+  background: white;
+  width: 100%;
+}
