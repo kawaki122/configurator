@@ -3,7 +3,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import './style.css'
 
-let scene, camera, renderer, loadedModel, controls;
+let scene, camera, renderer, loadedModel, controls, loadManager;
 let selectedType = "cornet", selectedFlavor = "Blueberry";
 
 initialize();
@@ -18,6 +18,7 @@ function initialize() {
   camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
   renderer = new THREE.WebGLRenderer();
   controls = new OrbitControls(camera, renderer.domElement);
+  loadManager = new THREE.LoadingManager()
 
   scene.background = new THREE.Color("lightgray");
 
@@ -43,7 +44,7 @@ function removeModel() {
 }
 
 function loadModel() {
-  const loader = new GLTFLoader();
+  const loader = new GLTFLoader(loadManager);
   loader.load(`./assets/${selectedType}/${selectedFlavor}/Project Name.gltf`, (gltf) => {
     if (loadedModel) {
       removeModel();
@@ -89,6 +90,24 @@ function handleFlavorChange() {
     loadModel()
   });
 }
+
+loadManager.onStart = function ( url, itemsLoaded, itemsTotal ) {
+	document.getElementById("loaderId").style.display = "flex";
+};
+
+loadManager.onLoad = function ( ) {
+  document.getElementById("loaderId").style.display = "none";
+	console.log( 'Loading complete!');
+};
+
+
+// loadManager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
+// 	console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+// };
+
+// loadManager.onError = function ( url ) {
+// 	console.log( 'There was an error loading ' + url );
+// };
 
 // function addPlane() {
 //   const geometry = new THREE.CircleGeometry(50, 20);
