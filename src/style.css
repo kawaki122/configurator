@@ -3,6 +3,7 @@ body {
   padding: 0px;
   background: white;
   font-family: sans-serif;
+  display: block !important;
 }
 
 .container {
